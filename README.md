@@ -5,6 +5,22 @@ Infrastructure Coding Test
 
 Script the creation of a web server and your choice of database server, and a script to check the server is up.
 
+# STEPS
+
+1. Checkout fork of git project.
+	git clone https://github.com/rootleveltech/rlt-hiring-exercise.git
+
+2. In project directory, initialize for terraform.
+	terraform init
+
+3. Run plan, referencing keyfile.
+	terraform plan -var-file='../rlt-hiring-exercise-keyfiles/terraform.tfvars'
+	
+4. Apply plan
+	terraform apply -auto-approve -var-file='../rlt-hiring-exercise-keyfiles/terraform.tfvars'
+
+
+
 # Prerequisites
 
 You will need an AWS account. Create one if you don't own one already. You can use free-tier resources for this test.
