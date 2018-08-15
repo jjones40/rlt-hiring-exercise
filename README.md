@@ -5,21 +5,42 @@ Infrastructure Coding Test
 
 Script the creation of a web server and your choice of database server, and a script to check the server is up.
 
+# Infrastructure Description
+
+For this exercise terraform will be used to build infrastructure: one ec2 instance hosting nginx and mysql instances. Nginx will be configured to host a version.txt file containing one version number, using 1.0.6 from the example below. A checker script written in python is provided to meet the requirements listed below, including running it as a cron job.
+
 # STEPS
 
+0. Choose and cd to a project directory.
+   Choose a driectory outside this for keyfiles (in this case directory is one level above project):
+   	Secret Key, Secret Access Key, and Host access key.
+
 1. Checkout fork of git project.
-	git clone https://github.com/rootleveltech/rlt-hiring-exercise.git
+	> git clone https://github.com/rootleveltech/rlt-hiring-exercise.git
 
 2. In project directory, initialize for terraform.
-	terraform init
+	> terraform init
 
-3. Run plan, referencing keyfile.
-	terraform plan -var-file='../rlt-hiring-exercise-keyfiles/terraform.tfvars'
+3. Create *.tf file to generate infrastructure. Terraform looks for .tf files in directory.
+	create-infrastructure.tf
+
+4. Run plan, referencing keyfile, outside project directory
+	> terraform plan -var-file='../rlt-hiring-exercise-keyfiles/terraform.tfvars'
 	
-4. Apply plan
-	terraform apply -auto-approve -var-file='../rlt-hiring-exercise-keyfiles/terraform.tfvars'
+5. Apply plan
+	> terraform apply -auto-approve -var-file='../rlt-hiring-exercise-keyfiles/terraform.tfvars'
 
+6. Run check script checker.py. Tail log file to verify site up and serving correct version information.
+   	> checkey.py
+   	> tail -f checker.log
 
+6.1 Checker script can be configured to search for other version numbers by a config file:
+	checker.conf
+
+7. Finally clear infrastructure using destroy:
+	> terraform destroy -auto-approve -var-file='../rlt-hiring-exercise-keyfiles/terraform.tfvars'
+
+8. An AWS VPC read only account has been setup, and credentials will be provided.
 
 # Prerequisites
 
